@@ -1,11 +1,23 @@
 package pl.edu.agh.ics.to.models;
 
-public class Polaczenie {
-    int numerKlienta;
+import lombok.Data;
 
-    void odbierzNumer() {
+@Data
+public class Polaczenie {
+    private int numerKlienta;
+    private boolean zakonczone = false;
+    private TypDzialu typDzialu;
+
+    public Polaczenie(int numerKlienta, TypDzialu typDzialu) {
+        this.numerKlienta = numerKlienta;
+        this.typDzialu = typDzialu;
     }
 
-    void zakonczPolaczenie() {
+    public int odbierzNumer() {
+        return typDzialu.getNumber();
+    }
+
+    public void zakonczPolaczenie() {
+        zakonczone = true;
     }
 }
