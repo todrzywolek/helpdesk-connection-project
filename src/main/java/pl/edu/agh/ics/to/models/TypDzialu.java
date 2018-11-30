@@ -6,10 +6,12 @@ public enum TypDzialu {
     POMOCY_POWYPADKOWEJ(3),
     OBSLUGI_SAMOCHODOW_ZASTEPCZYCH(4);
 
-    public final String nazwaDzialu;
+    public String nazwaDzialu;
     public int number;
 
-
+    TypDzialu(int number) {
+        this.number = number;
+    }
     TypDzialu(int number, String nazwaDzialu) {
         this.nazwaDzialu = nazwaDzialu;
         this.number = number;
