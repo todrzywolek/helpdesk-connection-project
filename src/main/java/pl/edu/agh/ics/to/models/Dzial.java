@@ -12,12 +12,12 @@ public class Dzial {
     public Dzial(String nazwaDzialu, int nrWewnetrzny) {
         this.nazwaDzialu = nazwaDzialu;
         this.nrWewnetrzny = nrWewnetrzny;
-        this.polaczenie = new Polaczenie(-1, TypDzialu.fromNumber(nrWewnetrzny));
+        this.polaczenie = new Polaczenie(-1, nrWewnetrzny);
         this.polaczenie.setZakonczone(true);
     }
 
     public boolean czyZajete() {
-        return polaczenie.isZakonczone();
+        return !polaczenie.isZakonczone();
     }
 
     public void odbierzPolaczenie(Polaczenie polaczenie) {

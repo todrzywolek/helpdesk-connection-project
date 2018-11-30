@@ -1,8 +1,12 @@
 package pl.edu.agh.ics.to.models;
 
+import lombok.Data;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.Queue;
 
+@Data
 public class Infolinia {
 
     private List<Dzial> dzialy;
@@ -14,30 +18,27 @@ public class Infolinia {
     }
 
     public void nasluchujPolaczenia(Polaczenie polaczenie) {
-        if (!przekazDoDzialu(polaczenie)) {
-            oczekujacePolaczenia.add(polaczenie);
-        }
+        // TODO: implement listener
     }
 
     public boolean przekazDoDzialu(Polaczenie polaczenie) {
-        Dzial dzial = znajdzDzial(polaczenie.odbierzNumer());
-        if (dzial == null) {
+        Optional<Dzial> dzial = znajdzDzial(polaczenie.odbierzNumer());
+        if (!dzial.isPresent()) {
             throw new IllegalArgumentException("Niewlasciwy numer dzialu");
         }
-        if (dzial.czyZajete()) {
+        if (dzial.get().czyZajete()) {
             oczekujacePolaczenia.add(polaczenie);
             return false;
         }
         // TODO: make odbierzPolaczenie asynchronous
-        dzial.odbierzPolaczenie(polaczenie);
+        dzial.get().odbierzPolaczenie(polaczenie);
         return true;
     }
 
-    private Dzial znajdzDzial(int nrDzialu) {
+    private Optional<Dzial> znajdzDzial(int nrDzialu) {
         return dzialy.stream()
                 .filter(dzial -> dzial.getNrWewnetrzny() == nrDzialu)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
 }

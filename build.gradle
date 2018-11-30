@@ -20,6 +20,12 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.4'
     apt 'org.projectlombok:lombok:1.18.4'
     compile "org.codehaus.groovy:groovy-all:2.4.15"
+
+    // junit
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // spock
     testCompile "org.spockframework:spock-core:1.2-groovy-2.4"
+    testRuntime "net.bytebuddy:byte-buddy:1.8.21"
+    testRuntime "org.objenesis:objenesis:2.6"
 }
