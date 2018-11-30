@@ -17,4 +17,17 @@ public enum TypDzialu {
         return number;
     }
 
+    public static TypDzialu fromNumber(int number) {
+        TypDzialu[] dzialy = values();
+
+        for (int i = 0; i < dzialy.length; ++i) {
+            TypDzialu dzial = dzialy[i];
+            if (dzial.number == number) {
+                return dzial;
+            }
+        }
+
+        throw new IllegalArgumentException("Niewlasciwy numer dzialu");
+    }
+
 }
