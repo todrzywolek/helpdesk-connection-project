@@ -1,6 +1,7 @@
 package pl.edu.agh.ics.to.models;
 
 import lombok.Data;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.Queue;
 
 @Data
 public class Infolinia {
+    private static final Logger LOGGER = Logger.getLogger(Infolinia.class);
 
     private List<Dzial> dzialy;
     private Queue<Polaczenie> oczekujacePolaczenia;
@@ -17,8 +19,10 @@ public class Infolinia {
         this.oczekujacePolaczenia = oczekujacePolaczenia;
     }
 
-    public void nasluchujPolaczenia(Polaczenie polaczenie) {
-        // TODO: implement listener
+    public String nasluchujPolaczenia(Polaczenie polaczenie) {
+        boolean result = przekazDoDzialu(polaczenie);
+        if (result) return "Przekazano polaczenie. Dzial wolny. Przekierowano";
+        return "Przekazano polaczenie. Dzial zajety. Prosze czekac";
     }
 
     public boolean przekazDoDzialu(Polaczenie polaczenie) {
