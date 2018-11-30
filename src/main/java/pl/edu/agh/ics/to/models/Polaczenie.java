@@ -6,15 +6,15 @@ import lombok.Data;
 public class Polaczenie {
     private int numerKlienta;
     private boolean zakonczone = false;
-    private TypDzialu typDzialu;
+    private int nrDzialu;
 
-    public Polaczenie(int numerKlienta, TypDzialu typDzialu) {
+    public Polaczenie(int numerKlienta, int nrDzialu) {
         this.numerKlienta = numerKlienta;
-        this.typDzialu = typDzialu;
+        this.nrDzialu = nrDzialu;
     }
 
     public int odbierzNumer() {
-        return typDzialu.getNumber();
+        return nrDzialu;
     }
 
     public void zakonczPolaczenie() {
