@@ -29,6 +29,12 @@ public class Infolinia {
         if (!dzial.isPresent()) {
             throw new IllegalArgumentException("Niewlasciwy numer dzialu");
         }
+
+        // add event listener
+        polaczenie.getCallEndedEvent().addHandler(x -> {
+            przekazDoDzialu(oczekujacePolaczenia.poll());
+        });
+
         if (dzial.get().czyZajete()) {
             oczekujacePolaczenia.add(polaczenie);
             return false;
