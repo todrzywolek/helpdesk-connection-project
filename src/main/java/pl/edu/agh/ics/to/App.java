@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    private static final Logger LOGGER = LogManager.getLogger(App.class);
+    private static final Logger LOGGER = LogManager.getLogger("App");
 
     public static void main(String[] args) {
 

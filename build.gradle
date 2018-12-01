@@ -22,7 +22,6 @@ dependencies {
     compile "org.codehaus.groovy:groovy-all:2.4.15"
 
     // log4j
-    compileOnly 'log4j:log4j:1.2.17'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
 
@@ -42,4 +41,19 @@ jar {
                 'Main-Class': 'pl.edu.agh.ics.to.App'
         )
     }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'connection-system',
+                'Implementation-Version': version,
+                'Main-Class': 'pl.edu.agh.ics.to.App'
+    }
+    baseName = project.name
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
 }
