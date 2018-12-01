@@ -28,4 +28,6 @@ public class Polaczenie {
     public Event<CallEndedEventArgs> getCallEndedEvent() {
         return callEndedEvent;
     }
+
+
 }

@@ -1,19 +1,20 @@
 package pl.edu.agh.ics.to.models;
 
 import lombok.Data;
+import pl.edu.agh.ics.to.queue.Queue;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Queue;
 
 @Data
 public class Infolinia {
 //    private static final Logger LOGGER = Logger.getLogger(Infolinia.class);
 
     private List<Dzial> dzialy;
-    private Queue<Polaczenie> oczekujacePolaczenia;
+    private Map<Integer, Queue<Polaczenie>> oczekujacePolaczenia;
 
-    public Infolinia(List<Dzial> dzialy, Queue<Polaczenie> oczekujacePolaczenia) {
+    public Infolinia(List<Dzial> dzialy, Map<Integer, Queue<Polaczenie>> oczekujacePolaczenia) {
         this.dzialy = dzialy;
         this.oczekujacePolaczenia = oczekujacePolaczenia;
     }
@@ -32,11 +33,11 @@ public class Infolinia {
 
         // add event listener
         polaczenie.getCallEndedEvent().addHandler(x -> {
-            przekazDoDzialu(oczekujacePolaczenia.poll());
+            przekazDoDzialu(oczekujacePolaczenia.get(x.getPreviousCall().getNrDzialu()).dequeue());
         });
 
         if (dzial.get().czyZajete()) {
-            oczekujacePolaczenia.add(polaczenie);
+            oczekujacePolaczenia.get(polaczenie.getNrDzialu()).enqueue(polaczenie);
             return false;
         }
         // TODO: make odbierzPolaczenie asynchronous
