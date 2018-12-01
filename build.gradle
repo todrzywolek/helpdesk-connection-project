@@ -34,3 +34,12 @@ dependencies {
     testRuntime "net.bytebuddy:byte-buddy:1.8.21"
     testRuntime "org.objenesis:objenesis:2.6"
 }
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'pl.edu.agh.ics.to.App'
+        )
+    }
+}

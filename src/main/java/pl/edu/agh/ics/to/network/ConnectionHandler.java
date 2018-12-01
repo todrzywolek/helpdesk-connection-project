@@ -69,9 +69,8 @@ public class ConnectionHandler extends Thread {
 
     public String sendDepartmentInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Lista dzialow:\n");
         infolinia.getDzialy().forEach(dzial -> sb.append(
-                String.format("Nazwa dzialu: %s, Nr dzialu: %s\n", dzial.getNazwaDzialu(), dzial.getNrWewnetrzny())));
+                String.format("%s:%s\n", dzial.getNazwaDzialu(), dzial.getNrWewnetrzny())));
 
         return sb.toString();
     }

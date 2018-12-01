@@ -1,7 +1,6 @@
 package pl.edu.agh.ics.to.models;
 
 import lombok.Data;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +8,7 @@ import java.util.Queue;
 
 @Data
 public class Infolinia {
-    private static final Logger LOGGER = Logger.getLogger(Infolinia.class);
+//    private static final Logger LOGGER = Logger.getLogger(Infolinia.class);
 
     private List<Dzial> dzialy;
     private Queue<Polaczenie> oczekujacePolaczenia;
